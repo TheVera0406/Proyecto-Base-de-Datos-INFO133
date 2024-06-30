@@ -38,7 +38,7 @@ direcciones = ["Calle Falsa 123", "Avenida Siempre Viva 456", "Pasaje Olvidado 7
 sql_statements = []
 
 # Generar 700 registros aleatorios
-for _ in range(700):
+for id_cliente in range(1,701):
     nombre = random.choice(nombres)
     apellido = random.choice(apellidos)
     direccion = random.choice(direcciones)
@@ -49,7 +49,7 @@ for _ in range(700):
     rut_cliente = generar_rut()
     
     # Construir la sentencia SQL para insertar el registro
-    sql_statement = f"INSERT INTO clientes (nombre_cliente, apellido_cliente, direccion_cliente, comuna_cliente, region_cliente, sexo, fecha_nacimiento, rut_cliente) VALUES ('{nombre}', '{apellido}', '{direccion}', '{comuna}', '{region}', '{sexo}', '{fecha_nacimiento}', '{rut_cliente}');"
+    sql_statement = f"INSERT INTO clientes (id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, comuna_cliente, region_cliente, sexo, fecha_nacimiento, rut_cliente) VALUES ('{id_cliente}', '{nombre}', '{apellido}', '{direccion}', '{comuna}', '{region}', '{sexo}', '{fecha_nacimiento}', '{rut_cliente}');"
     sql_statements.append(sql_statement)
 
 # Escribir el script SQL en un archivo

@@ -15,12 +15,12 @@ precios_productos = [9990, 12990, 14990, 7990, 5990, 8990, 19990, 19990, 19990, 
 sql_statements = []
 
 # Generar 100 registros aleatorios
-for _ in range(100):
+for id_produ in range(1,101):
     nombre_prod = random.choice(nombres_productos)
     precio_prod = random.choice(precios_productos)
     
     # Construir la sentencia SQL para insertar el registro
-    sql_statement = f"INSERT INTO producto (nombre_prod, precio_prod) VALUES ('{nombre_prod}', {precio_prod});"
+    sql_statement = f"INSERT INTO producto (id_produ, nombre_prod, precio_prod) VALUES ('{id_produ}', '{nombre_prod}', {precio_prod});"
     sql_statements.append(sql_statement)
 
 # Escribir el script SQL en un archivo
