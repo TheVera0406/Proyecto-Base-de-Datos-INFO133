@@ -20,7 +20,7 @@ for id_produ in range(1,101):
     precio_prod = random.choice(precios_productos)
     
     # Construir la sentencia SQL para insertar el registro
-    sql_statement = f"INSERT INTO producto (id_produ, nombre_prod, precio_prod) VALUES ('{id_produ}', '{nombre_prod}', {precio_prod});"
+    sql_statement = f"INSERT INTO producto (id_prod, nombre_prod, precio_prod) VALUES ('{id_produ}', '{nombre_prod}', {precio_prod});"
     sql_statements.append(sql_statement)
 
 # Escribir el script SQL en un archivo

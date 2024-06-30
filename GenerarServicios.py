@@ -16,10 +16,10 @@ for id_serv in range(1, 21):  # Generamos 20 servicios
     tipo_serv = random.choice(tipos_servicios)
     
     # Generar un precio aleatorio entre $5000 y $100000
-    precio_serv = round(random.uniform(5000, 100000), -2)  # Redondeamos a los 100 más cercanos
+    precio_serv = random.randint(5000, 100000)
 
     # Construir la sentencia SQL para insertar el registro
-    sql_statement = f"INSERT INTO servicio (id_serv, tipo_serv, precio_serv) VALUES ({id_serv}, '{tipo_serv}', ${precio_serv:.2f});"
+    sql_statement = f"INSERT INTO servicio (id_serv, tipo_serv, precio_serv) VALUES ({id_serv}, '{tipo_serv}', '{precio_serv}');"
     sql_statements.append(sql_statement)
 
 # Escribir el script SQL en un archivo

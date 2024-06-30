@@ -18,11 +18,6 @@ def generar_horas():
         hora_fin = time(17, 0)
     
     return hora_inicio, hora_fin
-
-# Función para generar un total aleatorio
-def generar_total():
-    return round(random.uniform(10000, 100000), -2)  # Entre $10,000 y $100,000, redondeado a 100
-
 # Lista para almacenar las sentencias SQL
 sql_statements = []
 
@@ -33,10 +28,10 @@ for id_cita in range(1, 1501):
     id_cliente = random.randint(1, 700)  
     fecha_cita = generar_fecha()
     hora_inicio, hora_fin = generar_horas()
-    total = generar_total()
+    total = random.randint(5000, 100000)
 
     # Construir la sentencia SQL para insertar el registro
-    sql_statement = f"""INSERT INTO cita (id_cita, id_sede, id_emple, id_cliente, hora_inicio, hora_fin, fecha_cita, total) VALUES ({id_cita}, {id_sede}, {id_emple}, {id_cliente}, '{hora_inicio}', '{hora_fin}', '{fecha_cita}', ${total:.2f});"""
+    sql_statement = f"""INSERT INTO cita (id_cita, id_sede, id_emple, id_cliente, hora_inicio, hora_fin, fecha_cita, total) VALUES ({id_cita}, {id_sede}, {id_emple}, {id_cliente}, '{hora_inicio}', '{hora_fin}', '{fecha_cita}', '{total}');"""
     sql_statements.append(sql_statement)
 
 # Escribir el script SQL en un archivo
