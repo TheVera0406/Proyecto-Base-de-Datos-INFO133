@@ -1,7 +1,7 @@
 import random
 
 # Asumimos que ya tenemos citas generadas
-num_citas = 1500  # El número de citas que generamos anteriormente
+num_citas = 75000  # El número de citas que generamos anteriormente
 
 # Asumimos el número de servicios y productos
 num_servicios = 20  # Ajusta esto al número real de servicios que tienes

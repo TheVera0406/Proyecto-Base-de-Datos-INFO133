@@ -1,46 +1,43 @@
 import random
+from datetime import datetime, date, time, timedelta
 
-# Diccionario de regiones y sus comunas correspondientes
-regiones_comunas = {
-    "Metropolitana": ["Santiago", "Providencia", "Las Condes", "Maipu"],
-    "Valparaiso": ["Valparaiso", "Quilpue", "Villa Alemana", "Concon"],
-    "Biobio": ["Concepcion", "Talcahuano", "Los Angeles", "Chillan", "Coronel"],
-    "Antofagasta": ["Antofagasta", "Calama", "Tocopilla", "Mejillones", "Taltal"],
-    "Araucania": ["Temuco", "Villarrica", "Angol", "Victoria", "Lautaro"],
-    "Los Rios": ["Valdivia", "Corral", "Rio Bueno", "La Union", "Mafil", "Lanco", "Mariquina"],
-    "Los Lagos": ["Osorno", "Puerto Montt", "Castro", "Puerto Varas"]
-}
+# Función para generar una fecha aleatoria entre enero 2024 y junio 2024
+def generar_fecha():
+    start_date = date(2024, 1, 1)
+    end_date = date(2024, 6, 30)
+    return start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
 
-# Listas de nombres y direcciones de peluquerías
-nombres_pelu = [
-    "Estilo Único", "Cortes Mágicos", "Belleza Total", "Glamour Hair", "Tijeras de Oro",
-    "Pelo Perfecto", "Ondas y Más", "Colores Vivos", "Esencia Capilar", "Mechones Divinos",
-    "Brillo Natural", "Cabello de Ensueño", "Corte Elegante", "Rizos Perfectos", "Estilo Urbano"
-]
-
-direcciones = [
-    "Avenida Principal 123", "Calle del Comercio 456", "Paseo de la Moda 789", "Boulevard Estilista 101",
-    "Plaza de la Belleza 202", "Callejón del Peinado 303", "Avenida Glamour 404", "Calle Estilo 505",
-    "Pasaje del Espejo 606", "Camino de las Tijeras 707", "Avenida del Color 808", "Calle del Secador 909",
-    "Plaza del Cepillo 111", "Paseo del Rizo 222", "Avenida de la Creatividad 333"
-]
+# Función para generar hora de inicio y fin
+def generar_horas():
+    hora_inicio = time(random.randint(9, 16), random.choice([0, 15, 30, 45]))
+    duracion = timedelta(minutes=random.choice([30, 45, 60, 90, 120]))
+    hora_fin = (datetime.combine(date.today(), hora_inicio) + duracion).time()
+    
+    # Asegurarse de que la hora de fin no pase de las 17:00
+    if hora_fin > time(17, 0):
+        hora_fin = time(17, 0)
+    
+    return hora_inicio, hora_fin
 
 # Lista para almacenar las sentencias SQL
 sql_statements = []
 
-# Generar 50 registros aleatorios
-for id_sede in range(1, 51):  # Generamos 50 sedes
-    nombre_pelu = random.choice(nombres_pelu)
-    direccion_pelu = random.choice(direcciones)
-    region_pelu = random.choice(list(regiones_comunas.keys()))
-    comuna_pelu = random.choice(regiones_comunas[region_pelu])
+# Generar 1500 citas aleatorias para cada sede
+for id_sede in range(1, 51):  # 50 sedes
+    for _ in range(1500):  # 1500 citas por sede
+        id_cita = len(sql_statements) + 1  # Incrementar id_cita
+        id_emple = random.randint(1, 200)    
+        id_cliente = random.randint(1, 700)  
+        fecha_cita = generar_fecha()
+        hora_inicio, hora_fin = generar_horas()
+        total = random.randint(5000, 100000)
 
-    # Construir la sentencia SQL para insertar el registro
-    sql_statement = f"INSERT INTO sede_pelu (id_sede, nombre_pelu, direccion_pelu, comuna_pelu, region_pelu) VALUES ({id_sede}, '{nombre_pelu}', '{direccion_pelu}', '{comuna_pelu}', '{region_pelu}');"
-    sql_statements.append(sql_statement)
+        # Construir la sentencia SQL para insertar el registro
+        sql_statement = f"""INSERT INTO cita (id_cita, id_sede, id_emple, id_cliente, hora_inicio, hora_fin, fecha_cita, total) VALUES ({id_cita}, {id_sede}, {id_emple}, {id_cliente}, '{hora_inicio}', '{hora_fin}', '{fecha_cita}', '{total}');"""
+        sql_statements.append(sql_statement)
 
 # Escribir el script SQL en un archivo
-with open("insert_sede_pelu.sql", "w") as file:
+with open("insert_cita.sql", "w") as file:
     file.write("\n".join(sql_statements))
 
-print("El script SQL se ha generado correctamente en el archivo 'insert_sede_pelu.sql'.")
+print(f"El script SQL se ha generado correctamente en el archivo 'insert_cita.sql' con {len(sql_statements)} registros.")
