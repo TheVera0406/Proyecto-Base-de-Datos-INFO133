@@ -70,7 +70,7 @@ class AdminApp:
         window.title("Insertar Cliente")
 
         # Campos del formulario
-        fields = ['Nombre', 'Apellido', 'Dirección', 'Comuna', 'Región', 'Sexo', 'Fecha de Nacimiento', 'RUT']
+        fields = ['ID', 'Nombre', 'Apellido', 'Dirección', 'Comuna', 'Región', 'Sexo', 'Fecha de Nacimiento', 'RUT']
         entries = []
 
         for field in fields:
@@ -90,7 +90,7 @@ class AdminApp:
         cursor = self.conexion.cursor()
         try:
             cursor.execute("""
-                INSERT INTO clientes (nombre_cliente, apellido_cliente, direccion_cliente, 
+                INSERT INTO clientes (id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, 
                 comuna_cliente, region_cliente, sexo, fecha_nacimiento, rut_cliente)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id_cliente;
